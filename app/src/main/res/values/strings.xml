@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ChattingApp</string>
+    <string name="logout">Logout</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="email_icon">email icon</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="password_icon">password icon</string>
+    <string name="Retype_your_password">Retype your password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
 </resources>
