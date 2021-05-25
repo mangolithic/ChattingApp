@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText emailEt,passwordEt;
+    private EditText emailEt, passwordEt;
     private AlertDialog.Builder builder;
     private FirebaseAuth firebaseAuth;
 
@@ -45,8 +45,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
         private void Login(){
-            String email=emailEt.getText().toString();
-            String password=passwordEt.getText().toString();
+
+            String email = emailEt.getText().toString();
+            String password = passwordEt.getText().toString();
+
             if(TextUtils.isEmpty(email)){
                 emailEt.setError("Enter your email");
                 return;
@@ -56,20 +58,20 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            builder.setMessage("Please wait...");
-            builder.show();
-
             firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, task -> {
+
                 if(task.isSuccessful()){
+                    builder.setMessage("Please wait...");
+                    builder.show();
                     Toast.makeText(MainActivity.this,"Login successfully!",Toast.LENGTH_LONG).show();
-                    Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+                    Intent intent=new Intent(MainActivity.this, SecondActivity.class);
                     startActivity(intent);
+                    finish();
                 }
+
                 else{
-                    Toast.makeText(MainActivity.this,"Failed to sign in!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Failed to sign in, password may be incorrect!",Toast.LENGTH_LONG).show();
                 }
-                builder.setCancelable(false);
-                finish();
             });
         }
 }
