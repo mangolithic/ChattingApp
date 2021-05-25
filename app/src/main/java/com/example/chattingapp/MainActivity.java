@@ -36,12 +36,7 @@ public class MainActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(this);
         TextView signUpTv = findViewById(R.id.signUpTv);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Login();
-            }
-        });
+        signInButton.setOnClickListener(v -> Login());
 
         signUpTv.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
@@ -63,21 +58,19 @@ public class MainActivity extends AppCompatActivity {
 
             builder.setMessage("Please wait...");
             builder.show();
-            builder.setCancelable(false);
 
-            firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(MainActivity.this,"Login successfully!",Toast.LENGTH_LONG).show();
-                        Intent intent=new Intent(MainActivity.this,SecondActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else{
-                        Toast.makeText(MainActivity.this,"Failed to sign in!",Toast.LENGTH_LONG).show();
-                        finish();
-                    }
+            firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, task -> {
+                if(task.isSuccessful()){
+                    Toast.makeText(MainActivity.this,"Login successfully!",Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+                    startActivity(intent);
+                    finish();
+                    builder.setCancelable(false);
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Failed to sign in!",Toast.LENGTH_LONG).show();
+                    finish();
+                    builder.setCancelable(false);
                 }
             });
         }

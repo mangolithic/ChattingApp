@@ -73,17 +73,18 @@ public class SignUpActivity extends AppCompatActivity {
 
         builder.setMessage("Please wait...");
         builder.show();
-        builder.setCancelable(false);
 
         firebaseAuth.createUserWithEmailAndPassword(email,password1).addOnCompleteListener(this, task -> {
             if(task.isSuccessful()){
                 Toast.makeText(SignUpActivity.this,"Successfully registered!",Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(SignUpActivity.this,SecondActivity.class);
                 startActivity(intent);
+                builder.setCancelable(false);
                 finish();
             }
             else{
                 Toast.makeText(SignUpActivity.this,"Failed to sign up!",Toast.LENGTH_LONG).show();
+                builder.setCancelable(false);
             }
         });
     }

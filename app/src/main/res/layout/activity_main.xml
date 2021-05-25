@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#83A5C1"
+    android:background="#ABD1F1"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="30dp"
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/don_t_have_an_account"
-            android:textColor="#ffffff"
+            android:textColor="#4E4B4B"
             android:textSize="18sp" />
 
         <TextView
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/sign_up"
-            android:textColor="#ffffff"
+            android:textColor="#1F537C"
             android:textSize="20sp"
             android:textStyle="bold" />
 

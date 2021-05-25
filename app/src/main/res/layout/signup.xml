@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#83A5C1"
+    android:background="#ABD1F1"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="30dp">
@@ -26,12 +26,12 @@
             android:layout_height="65dp"
             android:background="@drawable/rectangle_field"
             android:hint="@string/enter_your_email"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:paddingVertical="15dp"
             android:paddingLeft="60dp"
             android:paddingRight="60dp"
-            android:textColor="#000000"
-            android:importantForAutofill="no" />
+            android:textColor="#000000" />
 
         <ImageView
             android:layout_width="35dp"
@@ -55,12 +55,12 @@
             android:layout_height="65dp"
             android:background="@drawable/rectangle_field"
             android:hint="@string/enter_your_password"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:paddingVertical="15dp"
             android:paddingLeft="60dp"
             android:paddingRight="60dp"
-            android:textColor="#000000"
-            android:importantForAutofill="no" />
+            android:textColor="#000000" />
 
         <ImageView
             android:layout_width="35dp"
@@ -84,12 +84,12 @@
             android:layout_height="65dp"
             android:background="@drawable/rectangle_field"
             android:hint="@string/Retype_your_password"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:paddingVertical="15dp"
             android:paddingLeft="60dp"
             android:paddingRight="60dp"
-            android:textColor="#000000"
-            android:importantForAutofill="no" />
+            android:textColor="#000000" />
 
         <ImageView
             android:layout_width="35dp"
@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/already_have_an_account"
-            android:textColor="#ffffff"
+            android:textColor="#4E4B4B"
             android:textSize="18sp" />
 
         <TextView
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/sign_in"
-            android:textColor="#ffffff"
+            android:textColor="#1F537C"
             android:textSize="20sp"
             android:textStyle="bold" />
 
