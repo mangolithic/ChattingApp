@@ -88,7 +88,10 @@ public class SignUpActivity extends AppCompatActivity {
                 finish();
             }
             else{
-                Toast.makeText(SignUpActivity.this,"Failed to sign up! Email may have already been registered",Toast.LENGTH_LONG).show();
+                Toast.makeText(SignUpActivity.this,"Failed to sign up, email may have already been registered!",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(SignUpActivity.this, SignUpActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
