@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     builder.setMessage("Please wait...");
                     builder.show();
                     Toast.makeText(MainActivity.this,"Login successfully!",Toast.LENGTH_LONG).show();
-                    Intent intent=new Intent(MainActivity.this, SecondActivity.class);
+                    Intent intent=new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }

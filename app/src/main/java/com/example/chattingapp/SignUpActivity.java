@@ -83,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
                 builder.setMessage("Please wait...");
                 builder.show();
                 Toast.makeText(SignUpActivity.this,"Successfully registered!",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(SignUpActivity.this, SecondActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
