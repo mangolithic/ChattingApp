@@ -17,6 +17,7 @@ public class SecondActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         logout=findViewById(R.id.logout);
+
         logout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent=new Intent(SecondActivity.this,MainActivity.class);
