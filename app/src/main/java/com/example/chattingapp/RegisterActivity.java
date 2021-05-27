@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                             myRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                   @Override
                                   public void onComplete(@NonNull Task<Void> task) {
+                                      Toast.makeText(RegisterActivity.this, "Please wait", Toast.LENGTH_SHORT).show();
 
                                       if (task.isSuccessful()){
                                           Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);

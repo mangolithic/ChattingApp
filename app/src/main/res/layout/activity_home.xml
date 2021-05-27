@@ -6,20 +6,5 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:backgroundTint="#FFF8E3"
-        android:text="@string/logout"
-        android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
