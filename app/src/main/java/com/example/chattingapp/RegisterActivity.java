@@ -90,6 +90,8 @@ public class RegisterActivity extends AppCompatActivity {
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("id", userid);
                             hashMap.put("username",username);
+                            hashMap.put("password",password);
+                            hashMap.put("email",email);
                             hashMap.put("imageURL","default");
 
                             myRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -104,12 +106,12 @@ public class RegisterActivity extends AppCompatActivity {
                                           finish();
                                           Toast.makeText(RegisterActivity.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
                                       }
+                                      else{
+                                          String message = Objects.requireNonNull(task.getException()).toString();
+                                          Toast.makeText(RegisterActivity.this, "Failed to register! Error : " + message, Toast.LENGTH_SHORT).show();
+                                      }
                                   }
                               });
-                        }
-                        else{
-                            String message = Objects.requireNonNull(task.getException()).toString();
-                            Toast.makeText(RegisterActivity.this, "Failed to register! Error : " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
