@@ -36,7 +36,8 @@ public class LoginActivity extends AppCompatActivity{
         super.onStart();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (firebaseUser !=null){
+        //If user is already logged in
+        if (firebaseUser != null) {
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
             mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(mainIntent);
@@ -47,17 +48,27 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
+        //Initiliaze
         LoginBtn = (Button) findViewById(R.id.loginBtn);
-        UEmail = (EditText) findViewById(R.id.email);
+        UEmail = (EditText) findViewById(R.id.emailET);
         UPassword = (EditText) findViewById(R.id.passwordET);
         SignUp = (TextView) findViewById(R.id.signUpTV);
         ForgotPassword = (TextView) findViewById(R.id.forgotpassword);
 
         auth = FirebaseAuth.getInstance();
 
+        //Sign up
+        SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(registerIntent);
+            }
+        });
 
+        //Login
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,8 +80,10 @@ public class LoginActivity extends AppCompatActivity{
                 }
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(LoginActivity.this, "Please enter password", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else {
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
                         @Override
                         public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
@@ -79,7 +92,8 @@ public class LoginActivity extends AppCompatActivity{
                                 startActivity(mainIntent);
                                 finish();
                                 Toast.makeText(LoginActivity.this, "Registeres successfully!", Toast.LENGTH_SHORT).show();
-                            } else {
+                            }
+                            else {
                                 String message = Objects.requireNonNull(task.getException()).toString();
                                 Toast.makeText(LoginActivity.this, "Failed to login! Error : " + message, Toast.LENGTH_LONG).show();
                             }
@@ -88,15 +102,6 @@ public class LoginActivity extends AppCompatActivity{
                 }
             }
         });
-
-        SignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(registerIntent);
-            }
-        });
-    }
-}
+}}
 
  

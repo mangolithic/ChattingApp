@@ -1,16 +1,16 @@
-package com.example.chattingapp;
+package com.example.chattingapp.Model;
 
-public class UsersModel {
+public class Users {
 
     private String id;
     private String username;
     private String imageURL;
 
-    //constructor
-    public UsersModel() {
+    //constructors
+    public Users() {
     }
 
-    public UsersModel(String id, String username, String imageURL) {
+    public Users(String id, String username, String imageURL) {
         this.id = id;
         this.id = username;
         this.imageURL = imageURL;

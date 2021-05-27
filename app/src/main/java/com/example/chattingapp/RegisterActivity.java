@@ -25,26 +25,28 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private Button Register;
-    private EditText UserEmail,UserPassword, Username;
-    private TextView SignIn;
-    private FirebaseAuth auth;
-    private DatabaseReference myRef;
+    Button Register;
+    EditText UserEmail,UserPassword, Username;
+    TextView SignIn;
+    FirebaseAuth auth;
+    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        //Initialize
         auth = FirebaseAuth.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference();
 
+        SignIn = (TextView) findViewById(R.id.signIn);
         Register = (Button) findViewById(R.id.register);
         UserEmail = (EditText) findViewById(R.id.email);
         Username = (EditText) findViewById(R.id.username);
         UserPassword = (EditText) findViewById(R.id.password1);
-        SignIn = (TextView) findViewById(R.id.signIn);
 
+        //Login
         SignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -53,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        //Sign up
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,12 +65,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     Toast.makeText(RegisterActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                } else {
-                    Register(username,email,password);
+                }
+                else {
+                    Register(username, email, password);
                 }
             }
         });
     }
+
+        //Register()
         private void Register(final String username, String email, String password){
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -95,13 +101,14 @@ public class RegisterActivity extends AppCompatActivity {
                                           mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                           startActivity(mainIntent);
                                           finish();
-                                          Toast.makeText(RegisterActivity.this, "Account Created Successfully...", Toast.LENGTH_SHORT).show();
+                                          Toast.makeText(RegisterActivity.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
                                       }
                                   }
                               });
-                        }else{
+                        }
+                        else{
                             String message = Objects.requireNonNull(task.getException()).toString();
-                            Toast.makeText(RegisterActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Failed to register! Error : " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
