@@ -68,8 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-        private void Register(final String Username, String UserEmail, String UserPassword){
-            auth.createUserWithEmailAndPassword(UserEmail, UserPassword)
+        private void Register(final String username, String email, String password){
+            auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -83,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("id", userid);
-                            hashMap.put("username",Username);
+                            hashMap.put("username",username);
                             hashMap.put("imageURL","default");
 
                             myRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
