@@ -62,19 +62,20 @@ public class RegisterActivity extends AppCompatActivity {
                 String username = Username.getText().toString();
                 String email = UserEmail.getText().toString();
                 String password = UserPassword.getText().toString();
+                String about = "I am a new user";
 
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     Toast.makeText(RegisterActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Register(username, email, password);
+                    Register(username, email, password,about);
                 }
             }
         });
     }
 
         //Register()
-        private void Register(final String username, String email, String password){
+        private void Register(final String username, String email, String password, String about){
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -107,12 +108,13 @@ public class RegisterActivity extends AppCompatActivity {
                                           finish();
                                           Toast.makeText(RegisterActivity.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
                                       }
-                                      else{
-                                          String message = Objects.requireNonNull(task.getException()).toString();
-                                          Toast.makeText(RegisterActivity.this, "Failed to register! Error : " + message, Toast.LENGTH_SHORT).show();
-                                      }
                                   }
                               });
+                        }
+                        else{
+                            String about ="I am a new user";
+                            String message = Objects.requireNonNull(task.getException()).toString();
+                            Toast.makeText(RegisterActivity.this, "Failed to register! Error : " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
