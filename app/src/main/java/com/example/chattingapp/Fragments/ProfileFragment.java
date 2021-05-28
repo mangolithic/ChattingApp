@@ -49,6 +49,8 @@ public class ProfileFragment extends Fragment {
     ImageView saveBtn;
     EditText edit_name, edit_about;
 
+    String _USERNAME, _ABOUT;
+
     DatabaseReference ref;
     FirebaseUser fUser;
     StorageReference storageRef;
@@ -70,7 +72,6 @@ public class ProfileFragment extends Fragment {
 
         storageRef = FirebaseStorage.getInstance().getReference("uploads");
 
-
         fUser = FirebaseAuth.getInstance().getCurrentUser();
         ref =FirebaseDatabase.getInstance().getReference("MyUsers").child(fUser.getUid());
 
@@ -78,10 +79,11 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Users name =snapshot.getValue(Users.class);
-                String description =snapshot.child("about").getValue().toString();
+                _USERNAME = snapshot.child("username").getValue().toString();
+                _ABOUT =snapshot.child("about").getValue().toString();
 
-                edit_name.setText(name.getUsername());
-                edit_about.setText(description);
+                edit_name.setText(_USERNAME);
+                edit_about.setText(_ABOUT);
 
                 if(name.getImageURL().equals("default")){
                     edit_userPhoto.setImageResource(R.drawable.profile);
@@ -104,17 +106,41 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                edit_name.getText().toString();
-                edit_about.getText().toString();
-
-                Toast.makeText(getContext(),"Changes saved successfully", Toast.LENGTH_SHORT).show();
+                {
+                    if(isUNameChanged() || isAboutChanged()){
+                        Toast.makeText(getContext(),"Changes saved successfully", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(),"Something went wrong! \nPlease try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
         return view;
+    }
+
+
+    private boolean isUNameChanged(){
+        if(!_USERNAME.equals(edit_name.getText().toString())){
+            ref.child("username").setValue(edit_name.getText().toString());
+            _USERNAME = edit_name.getText().toString();
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private boolean isAboutChanged(){
+        if(!_ABOUT.equals(edit_about.getText().toString())){
+            ref.child("about").setValue(edit_about.getText().toString());
+            _ABOUT = edit_about.getText().toString();
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private void SelectImage() {
