@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +15,8 @@ import com.example.chattingapp.Model.Users;
 import com.example.chattingapp.R;
 
 import java.util.List;
+
+
 
 public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
     private Context context;
@@ -30,14 +32,14 @@ public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public UserAdapter.ViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.user_items,
                 parent,false);
-        return new UserAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  UserAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Users users = myUsers.get(position);
         holder.username.setText(users.getUsername());
 
@@ -50,18 +52,18 @@ public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return myUsers.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView username;
-        public ImageView imageView;
+    class ViewHolder extends RecyclerView.ViewHolder{
+        TextView username;
+        CircleImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            username = itemView.findViewById(R.id.usertext);
-            imageView = itemView.findViewById(R.id.userimage);
+            username = itemView.findViewById(R.id.userText);
+            imageView = itemView.findViewById(R.id.userImage);
         }
     }
 }
