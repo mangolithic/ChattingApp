@@ -7,6 +7,7 @@ public class Users {
     private String password;
     private String email;
     private String imageURL;
+    private String about;
 
     //constructors
     public Users() {
@@ -18,6 +19,7 @@ public class Users {
         this.password = password;
         this.email = email;
         this.imageURL = imageURL;
+        this.about = about;
     }
 
     //getters and setters
@@ -60,4 +62,13 @@ public class Users {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
 }

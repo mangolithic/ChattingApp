@@ -56,7 +56,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<Void> task) {
+            public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(ForgotPasswordActivity.this, "Check your email inbox", Toast.LENGTH_SHORT).show();
                     Intent loginIntent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);

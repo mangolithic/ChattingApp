@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+//logout
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_menu,menu);

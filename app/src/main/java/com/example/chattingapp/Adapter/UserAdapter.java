@@ -48,6 +48,9 @@ public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
         }else{
             Glide.with(context).load(users.getImageURL()).into(holder.imageView);
         }
+
+        holder.about.setText(users.getAbout());
+
     }
 
     @Override
@@ -58,12 +61,14 @@ public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView username;
         CircleImageView imageView;
+        TextView about;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             username = itemView.findViewById(R.id.userText);
             imageView = itemView.findViewById(R.id.userImage);
+            about = itemView.findViewById(R.id.about);
         }
     }
 }
