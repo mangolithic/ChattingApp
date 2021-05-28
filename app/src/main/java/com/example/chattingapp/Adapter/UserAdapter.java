@@ -1,6 +1,7 @@
 package com.example.chattingapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.chattingapp.ChatActivity;
 import com.example.chattingapp.Model.Users;
 import com.example.chattingapp.R;
 
@@ -51,6 +53,15 @@ public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
 
         holder.about.setText(users.getAbout());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent (context, ChatActivity.class);
+                intent.putExtra("userid",users.getId());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -71,6 +82,7 @@ public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
             about = itemView.findViewById(R.id.about);
         }
     }
+
 }
 
 
