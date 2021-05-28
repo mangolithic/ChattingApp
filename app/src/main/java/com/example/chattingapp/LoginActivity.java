@@ -58,6 +58,15 @@ public class LoginActivity extends AppCompatActivity{
 
         auth = FirebaseAuth.getInstance();
 
+        //Forgot password
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent passIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(passIntent);
+            }
+        });
+
         //Sign up
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
