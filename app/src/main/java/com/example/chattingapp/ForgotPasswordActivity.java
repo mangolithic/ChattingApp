@@ -3,6 +3,7 @@ package com.example.chattingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -58,8 +59,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(ForgotPasswordActivity.this, "Check your email inbox", Toast.LENGTH_SHORT).show();
+                    Intent loginIntent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+                    finish();
                 } else {
                     Toast.makeText(ForgotPasswordActivity.this, "Failed to send. Please try again!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ForgotPasswordActivity.this, ForgotPasswordActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
