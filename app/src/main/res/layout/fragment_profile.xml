@@ -13,8 +13,8 @@
         android:id="@+id/editSaveBtn"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="end"
+        android:layout_marginTop="10dp"
         android:src="@drawable/ic_baseline_check_circle_outline_24" />
 
     <de.hdodenhof.circleimageview.CircleImageView
