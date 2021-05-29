@@ -1,11 +1,14 @@
 package com.example.chattingapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference myRef;
 
+    AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        builder = new AlertDialog.Builder(this);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         myRef = FirebaseDatabase.getInstance().getReference("MyUsers").child(firebaseUser.getUid());
@@ -81,12 +88,33 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
 
             case R.id.logout:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
+                builder.setTitle(R.string.dialog_title);
+                builder.setMessage(R.string.dialog_message);
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                        Toast.makeText(getApplicationContext(),"Please sign-in to continue",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+                //FirebaseAuth.getInstance().signOut();
+                //startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                //finish();
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return false;
+
     }
 
     //add ViewpagerAdapter class for fragments
