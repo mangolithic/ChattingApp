@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChattingApp</string>
+    <string name="app_name">Babble</string>
     <string name="logout">Logout</string>
     <string name="sign_up">Sign Up</string>
     <string name="enter_your_email">Enter your email</string>
