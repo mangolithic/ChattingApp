@@ -60,7 +60,6 @@ public class ChatActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.profileimage);
         username = findViewById(R.id.user_name);
-
         sendbtn = findViewById(R.id.sendbtn);
         sendText = findViewById(R.id.sendtext);
 
@@ -99,33 +98,27 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        sendbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        sendbtn.setOnClickListener((v) ->  {
                 String msg = sendText.getText().toString();
                 if (!msg.equals("")) {
                     sendMessage(firebaseUser.getUid(), userid, msg);
                 } else {
-                    Toast.makeText(ChatActivity.this, "Please send a non empty message.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatActivity.this, "Please send a non-empty message", Toast.LENGTH_SHORT).show();
                 }
-
                 sendText.setText("");
-            }
-
-            private void sendMessage(String sender, String receiver, String message) {
-
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("sender", sender);
-                hashMap.put("receiver", receiver);
-                hashMap.put("Message", message);
-
-                reference.child("Chats").push().setValue(hashMap);
-            }
         });
+    }
 
+    private void sendMessage(String sender, String receiver, String message) {
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("sender", sender);
+        hashMap.put("receiver", receiver);
+        hashMap.put("message", message);
+
+        reference.child("Chats").push().setValue(hashMap);
     }
 
     private void readMessages(String myid, String userid, String imageURL) {

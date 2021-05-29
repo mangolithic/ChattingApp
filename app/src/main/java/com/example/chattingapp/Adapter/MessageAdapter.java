@@ -2,6 +2,7 @@ package com.example.chattingapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,26 +45,26 @@ public class MessageAdapter extends RecyclerView.Adapter <MessageAdapter.ViewHol
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
+    public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
         if (viewType == MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(context).inflate(R.layout.chat_item_right,
                     parent, false);
-            return new ViewHolder(view);
+            return new MessageAdapter.ViewHolder(view);
         } else {
             View view = LayoutInflater.from(context).inflate(R.layout.chat_item_left,
                     parent, false);
-            return new ViewHolder(view);
+            return new MessageAdapter.ViewHolder(view);
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
 
         Chat chat= myChat.get(position);
 
         holder.show_message.setText(chat.getMessage());
 
-        if (imgURL.equals("defaults")){
+        if (imgURL.equals("default")){
             holder.profile_image.setImageResource(R.drawable.profile);
         }else{
             Glide.with(context).load(imgURL).into(holder.profile_image);

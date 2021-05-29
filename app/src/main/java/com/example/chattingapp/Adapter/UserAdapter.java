@@ -34,10 +34,10 @@ public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
+    public UserAdapter.ViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.user_items,
                 parent,false);
-        return new ViewHolder(view);
+        return new UserAdapter.ViewHolder(view);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class UserAdapter extends RecyclerView.Adapter <UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent (context, ChatActivity.class);
+                Intent intent= new Intent(context, ChatActivity.class);
                 intent.putExtra("userid",users.getId());
                 context.startActivity(intent);
             }
