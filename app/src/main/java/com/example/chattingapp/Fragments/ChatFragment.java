@@ -2,65 +2,125 @@ package com.example.chattingapp.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.chattingapp.Adapter.UserAdapter;
+import com.example.chattingapp.Model.Chatlist;
+import com.example.chattingapp.Model.Users;
 import com.example.chattingapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ChatFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class ChatFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private UserAdapter userAdapter;
+    private List<Users> MyUser;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FirebaseUser fuser;
+    DatabaseReference ref;
+
+    private List<Chatlist> cl;
+
+    RecyclerView recyclerView;
+
 
     public ChatFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ChatFragment newInstance(String param1, String param2) {
-        ChatFragment fragment = new ChatFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+       View view =inflater.inflate(R.layout.fragment_chat,container,false);
+
+       recyclerView = view.findViewById(R.id.recycle_view1);
+       recyclerView.setHasFixedSize(true);
+       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+       fuser = FirebaseAuth.getInstance().getCurrentUser();
+       cl=new ArrayList<>();
+
+       ref= FirebaseDatabase.getInstance().getReference("ChatList").child(fuser.getUid());
+
+
+       ref.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+               cl.clear();
+
+               //loop for all users
+               for (DataSnapshot ss: snapshot.getChildren()){
+
+                   Chatlist clist= ss.getValue(Chatlist.class);
+                   cl.add(clist);
+
+               }
+               chatList();
+
+           }
+
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
+       return view;
     }
+
+    private void chatList() {
+
+        //getting all users
+        MyUser = new ArrayList<>();
+        ref=FirebaseDatabase.getInstance().getReference("MyUsers");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                MyUser.clear();
+
+                for (DataSnapshot ss: snapshot.getChildren()){
+                    Users user = ss.getValue(Users.class);
+                    for(Chatlist chatlist:cl){
+
+                        if (user.getId().equals(chatlist.getId())) {
+                            MyUser.add(user);
+                        }
+                    }
+                }
+
+                userAdapter= new UserAdapter(getContext(),MyUser);
+                recyclerView.setAdapter(userAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 }

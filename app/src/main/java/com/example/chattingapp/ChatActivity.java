@@ -51,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
     List<Chat> myChat;
 
     RecyclerView recycler_View;
+    String userid;
 
 
     @Override
@@ -73,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         intent = getIntent();
-        String userid = intent.getStringExtra("userid");
+        userid = intent.getStringExtra("userid");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
 
@@ -96,6 +97,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
 
         sendbtn.setOnClickListener((v) ->  {
@@ -119,6 +121,29 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("message", message);
 
         reference.child("Chats").push().setValue(hashMap);
+
+        //adding user to chat fragment(display the username)
+        final DatabaseReference chatRef=FirebaseDatabase.getInstance()
+                .getReference("ChatList")
+                .child(firebaseUser.getUid())
+                .child(userid);
+
+        chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                if(!snapshot.exists()){
+                    chatRef.child("id").setValue(userid);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     private void readMessages(String myid, String userid, String imageURL) {
