@@ -126,6 +126,7 @@ public class ProfileFragment extends Fragment {
     private boolean isUNameChanged(){
         if(!_USERNAME.equals(edit_name.getText().toString())){
             ref.child("username").setValue(edit_name.getText().toString());
+            ref.child("search").setValue(edit_name.getText().toString().toLowerCase());
             _USERNAME = edit_name.getText().toString();
             return true;
         }else{

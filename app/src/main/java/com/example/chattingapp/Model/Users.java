@@ -8,18 +8,20 @@ public class Users {
     private String email;
     private String imageURL;
     private String about;
+    private String search;
 
     //constructors
     public Users() {
     }
 
-    public Users(String id, String username, String imageURL, String password, String email) {
+    public Users(String id, String username, String imageURL, String password, String email, String search) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.imageURL = imageURL;
         this.about = about;
+        this.search = search;
     }
 
     //getters and setters
@@ -70,5 +72,9 @@ public class Users {
     public void setAbout(String about) {
         this.about = about;
     }
+
+    public void setSearch(String search){this.search = search;}
+
+    public String getSearch(){return search;}
 
 }

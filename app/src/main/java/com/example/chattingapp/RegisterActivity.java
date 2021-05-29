@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("email",email);
                             hashMap.put("imageURL","default");
                             hashMap.put("about", "I am a new user");
+                            hashMap.put("search", username.toLowerCase());
 
                             myRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                   @Override
@@ -112,7 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
                               });
                         }
                         else{
-                            String about ="I am a new user";
                             String message = Objects.requireNonNull(task.getException()).toString();
                             Toast.makeText(RegisterActivity.this, "Failed to register! Error : " + message, Toast.LENGTH_SHORT).show();
                         }
