@@ -3,6 +3,7 @@ package com.example.chattingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,17 +65,33 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = UserPassword.getText().toString();
                 String about = "I am a new user";
 
-                if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-                    Toast.makeText(RegisterActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(email)){
+                    UserEmail.setError("Enter your email");
+                    return;
+                }
+                else if(TextUtils.isEmpty(password)){
+                    UserPassword.setError("Enter your password");
+                    return;
+                }
+                else if(password.length()<4){
+                   UserPassword.setError("Password need to contain more than 4 alphanumerics");
+                    return;
+                }
+                else if(!isVallidEmail(email)){
+                    UserEmail.setError("Invalid email");
+                    return;
                 }
                 else {
-                    Register(username, email, password,about);
+                    Register(username, email, password, about);
                 }
             }
         });
     }
+    private boolean isVallidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
 
-        //Register()
+    //Register()
         private void Register(final String username, String email, String password, String about){
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -112,7 +129,6 @@ public class RegisterActivity extends AppCompatActivity {
                               });
                         }
                         else{
-                            String about ="I am a new user";
                             String message = Objects.requireNonNull(task.getException()).toString();
                             Toast.makeText(RegisterActivity.this, "Failed to register! Error : " + message, Toast.LENGTH_SHORT).show();
                         }

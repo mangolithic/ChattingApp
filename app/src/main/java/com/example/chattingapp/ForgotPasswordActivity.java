@@ -58,12 +58,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(ForgotPasswordActivity.this, "Check your email inbox", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotPasswordActivity.this, "Check your email inbox!", Toast.LENGTH_SHORT).show();
                     Intent loginIntent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
                     startActivity(loginIntent);
                     finish();
                 } else {
-                    Toast.makeText(ForgotPasswordActivity.this, "Failed to send. Please try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPasswordActivity.this, "Failed to send. Please enter a registered email!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(ForgotPasswordActivity.this, ForgotPasswordActivity.class);
                     startActivity(intent);
                     finish();
