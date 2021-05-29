@@ -13,17 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChattingApp">
+        <activity android:name=".SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
-
-
-
-
-
-
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ChatActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -37,13 +34,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
