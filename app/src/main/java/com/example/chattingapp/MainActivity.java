@@ -76,7 +76,40 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-//logout
+    //add ViewpagerAdapter class for fragments
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private ArrayList<Fragment> fragments;
+        private ArrayList<String> titles;
+
+        ViewPagerAdapter(FragmentManager fm){
+            super(fm);
+            this.fragments = new ArrayList<>();
+            this.titles = new ArrayList<>();
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position){
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        public void addFragment (Fragment fragment, String title){
+            fragments.add(fragment);
+            titles.add(title);
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles.get(position);
+        }
+    }
+    //logout
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_menu,menu);
@@ -84,9 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()){
-
             case R.id.logout:
                 builder.setTitle(R.string.dialog_title);
                 builder.setMessage(R.string.dialog_message);
@@ -107,50 +138,15 @@ public class MainActivity extends AppCompatActivity {
                 });
                 AlertDialog alert = builder.create();
                 alert.show();
-                //FirebaseAuth.getInstance().signOut();
-                //startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                //finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
-    //add ViewpagerAdapter class for fragments
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private ArrayList<Fragment> fragments;
-        private ArrayList<String> titles;
 
-        ViewPagerAdapter(FragmentManager fm){
-            super(fm);
-            this.fragments = new ArrayList<>();
-            this.titles =new ArrayList<>();
-        }
 
-        @NonNull
-        @Override
-        public Fragment getItem(int position){
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-        public void addFragment (Fragment fragment,String title){
-            fragments.add(fragment);
-            titles.add(title);
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles.get(position);
-        }
-    }
 
 
 }
