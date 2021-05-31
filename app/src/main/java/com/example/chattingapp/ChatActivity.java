@@ -101,20 +101,10 @@ public class ChatActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
 
-        /*Bundle bundle = getIntent().getExtras();
-        if (bundle != null)
-        {*/
-            //url = bundle.getString("URL"); //wth is this supposed to be hhhh
-        /*}else
-        {
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-        }*/
-
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Users user = snapshot.getValue(Users.class);
-                Chat chat = snapshot.getValue(Chat.class);
                 username.setText(user.getUsername());
 
                 if (user.getImageURL().equals("default")) {
@@ -245,8 +235,6 @@ public class ChatActivity extends AppCompatActivity {
             rootRef = FirebaseDatabase.getInstance().getReference("Chats");
 
             DatabaseReference userMessageKeyRef = rootRef.child("Chats").child(imgSender).child(imgReceiver).push();
-            /*String msgSender = "Chats/" + sender + "/" + receiver;
-            String msgReceiver = "Chats/" + receiver + "/" + sender;*/
 
             String messagePushID = userMessageKeyRef.getKey();
 
@@ -280,7 +268,6 @@ public class ChatActivity extends AppCompatActivity {
 
                         HashMap<String, Object> imageDetails = new HashMap<>();
                         imageDetails.put(messagePushID, imageMessage);
-                        //imageDetails.put(msgReceiver + "/" + messagePushID, imageMessage);
 
                         rootRef.updateChildren(imageDetails).addOnCompleteListener((task1) -> {
                             if(task1.isSuccessful()){
@@ -294,19 +281,6 @@ public class ChatActivity extends AppCompatActivity {
                             }
                             sendText.setText("");
                         });
-
-                        /*chat.setReceiver(receiver);
-                        chat.setSender(sender);
-                        chat.setMessage(url);
-                        chat.setType("IMAGE");
-                        chat.setURL(imageurl.toString());
-
-
-                        String id1 = database.getReference("Chats").child(sender).push().getKey();
-                        database.getReference("Chats").child(sender).child(id1).setValue(chat);
-
-                        String id2 = database.getReference("Chats").child(receiver).push().getKey();
-                        database.getReference("Chats").child(receiver).child(id2).setValue(chat);*/
 
                     }else {
                         loadingBar.dismiss();
@@ -325,93 +299,7 @@ public class ChatActivity extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType((contentResolver.getType(uri)));
     }
 
-    /*private void sendImage()
-    {
-        if (imageurl!= null){
-            rootRef = FirebaseDatabase.getInstance().getReference("Chats");
-
-            DatabaseReference userMessageKeyRef = rootRef.child("Chats").child(sender).child(receiver).push();
-            String msgSender = "Chats/" + sender + "/" + receiver;
-            String msgReceiver = "Chats/" + receiver + "/" + sender;
-
-            String messagePushID = userMessageKeyRef.getKey();
-
-            final StorageReference reference = storageReference.child (System.currentTimeMillis()+ "."+getFileExt(imageurl));
-            uploadTask=reference.putFile(imageurl);
-
-            //Task<Uri>urlTask =
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot,Task<Uri>>(){
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot>task) throws Exception{
-                    if (!task.isSuccessful()){
-                        throw task.getException();
-                    }
-
-                    return reference.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>(){
-                @Override
-                public void onComplete(@NonNull Task<Uri> task){
-
-                    if(task.isSuccessful()){
-                        Uri downloadUri = task.getResult();
-                        url = downloadUri.toString();
-
-                        HashMap<String, Object> imageMessage = new HashMap<>();
-                        imageMessage.put("URL", url);
-                        imageMessage.put("sender", sender);
-                        imageMessage.put("receiver", receiver);
-                        imageMessage.put("message", messagePushID);
-                        imageMessage.put("type", "IMAGE");
-
-                        HashMap<String, Object> imageDetails = new HashMap<>();
-                        imageDetails.put(msgSender + "/" + messagePushID, imageMessage);
-                        imageDetails.put(msgReceiver + "/" + messagePushID, imageMessage);
-
-                        rootRef.updateChildren(imageDetails).addOnCompleteListener((task1) -> {
-                                if(task1.isSuccessful()){
-                                    loadingBar.dismiss();
-                                    Toast.makeText(ChatActivity.this, "Message sent successfully",
-                                            Toast.LENGTH_SHORT).show();
-                                }else{
-                                    loadingBar.dismiss();
-                                    Toast.makeText(ChatActivity.this, "Failed to send",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                                sendText.setText("");
-                        });
-
-                        *//*chat.setReceiver(receiver);
-                        chat.setSender(sender);
-                        chat.setMessage(url);
-                        chat.setType("IMAGE");
-                        chat.setURL(imageurl.toString());
-*//*
-
-                        *//*String id1 = database.getReference("Chats").child(sender).push().getKey();
-                        database.getReference("Chats").child(sender).child(id1).setValue(chat);
-
-                        String id2 = database.getReference("Chats").child(receiver).push().getKey();
-                        database.getReference("Chats").child(receiver).child(id2).setValue(chat);
-*//*
-                    }else {
-                        loadingBar.dismiss();
-                        Toast.makeText(ChatActivity.this, "Failed to Upload", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-        }else
-        {
-            Toast.makeText(this, "Please select something", Toast.LENGTH_SHORT).show();
-        }
-
-    }*/
-
 }
 
-    /*private void setSupportActionBar(Toolbar toolbar){
-
-    }*/
 
     

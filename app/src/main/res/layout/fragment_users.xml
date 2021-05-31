@@ -13,11 +13,13 @@
         android:src="@drawable/ic_baseline_search_24"/>
 
     <EditText
+        android:id="@+id/searchUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:hint="Find user..."
-        android:id="@+id/searchUser"/>
+        android:layout_marginTop="7dp"
+        android:background="@null"
+        android:hint="@string/search_user" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@+id/searchUser"

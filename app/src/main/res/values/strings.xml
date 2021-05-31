@@ -17,6 +17,7 @@
     <string name="reset_inst">A link will be sent to your email to reset password. Please check your email.</string>
     <string name="reset_password">Reset Password</string>
     <string name="send">Send</string>
+    <string name="search_user">Find user...</string>
     <!--Logout alert dialog-->
     <string name="dialog_message">Are you sure you want to log out?</string>
     <string name="dialog_title">Log Out</string>
