@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:backgroundTint="#69047A"
         app:layout_constraintBottom_toTopOf="@id/recyclerview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,7 +24,6 @@
             android:id="@+id/profileimage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/black_circle"
             android:src="@drawable/profile"
             app:civ_border_color="#000000"
             app:civ_border_width="2dp" />
@@ -35,16 +34,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="TextView"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:id="@+id/bottom"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
-        android:backgroundTint="#C4EAF8"
+        android:backgroundTint="#CBCDCF"
         android:orientation="horizontal"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,22 +55,23 @@
 
         <ImageButton
             android:id="@+id/imagebtn"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginRight="350dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="5dp"
             android:layout_toLeftOf="@id/sendtext"
-            android:background="@drawable/camera" />
+            android:background="@drawable/ic_camera" />
 
         <EditText
             android:id="@+id/sendtext"
-            android:layout_width="271dp"
-            android:layout_height="35dp"
-            android:layout_marginRight="-3dp"
+            android:layout_width="250dp"
+            android:layout_height="47dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="18dp"
             android:layout_toLeftOf="@id/sendbtn"
-            android:background="@color/white"
+            android:background="#DEE8E8"
             android:hint="Type a message." />
 
         <ImageButton
@@ -78,9 +79,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="22dp"
-            android:layout_marginRight="22dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="19dp"
             android:background="@drawable/ic_send" />
     </RelativeLayout>
 

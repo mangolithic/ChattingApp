@@ -11,7 +11,7 @@
         android:id="@+id/profile_image"
         android:background="@drawable/black_circle"
         android:src="@drawable/profile"
-        app:civ_border_color="#000000"
+        app:civ_border_color="#69047A"
         app:civ_border_width="2dp"/>
 
     <LinearLayout
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:text="hello"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:id="@+id/showMsg"
         android:textSize="18sp"/>
 
