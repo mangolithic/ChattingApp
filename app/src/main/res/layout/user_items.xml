@@ -15,6 +15,8 @@
         android:text="Name"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/about"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/userImage"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -35,14 +37,28 @@
 
     <TextView
         android:id="@+id/about"
-        android:layout_width="250dp"
-        android:layout_height="49dp"
+        android:layout_width="245dp"
+        android:layout_height="25dp"
         android:layout_marginStart="36dp"
+        android:maxLines="1"
         android:text="TextView"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/userImage"
         app:layout_constraintTop_toBottomOf="@id/userText" />
+
+    <TextView
+        android:id="@+id/lastmsg"
+        android:layout_width="241dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="36dp"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@id/about" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

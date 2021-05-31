@@ -43,51 +43,46 @@ public class ChatFragment extends Fragment {
     RecyclerView recyclerView;
 
 
-    public ChatFragment() {
-        // Required empty public constructor
-    }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View view =inflater.inflate(R.layout.fragment_chat,container,false);
+        View view =inflater.inflate(R.layout.fragment_chat,container,false);
 
-       recyclerView = view.findViewById(R.id.recycle_view1);
-       recyclerView.setHasFixedSize(true);
-       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView = view.findViewById(R.id.recycle_view1);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-       fuser = FirebaseAuth.getInstance().getCurrentUser();
-       cl=new ArrayList<>();
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        cl=new ArrayList<>();
 
-       ref= FirebaseDatabase.getInstance().getReference("ChatList").child(fuser.getUid());
-
-
-       ref.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-               cl.clear();
-
-               //loop for all users
-               for (DataSnapshot ss: snapshot.getChildren()){
-
-                   Chatlist clist= ss.getValue(Chatlist.class);
-                   cl.add(clist);
-
-               }
-               chatList();
-
-           }
+        ref= FirebaseDatabase.getInstance().getReference("ChatList").child(fuser.getUid());
 
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-           }
-       });
-       return view;
+                cl.clear();
+
+                //loop for all users
+                for (DataSnapshot ss: snapshot.getChildren()){
+
+                    Chatlist clist= ss.getValue(Chatlist.class);
+                    cl.add(clist);
+
+                }
+                chatList();
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return view;
     }
 
     private void chatList() {
@@ -111,7 +106,7 @@ public class ChatFragment extends Fragment {
                     }
                 }
 
-                userAdapter= new UserAdapter(getContext(),MyUser);
+                userAdapter= new UserAdapter(getContext(),MyUser,true);
                 recyclerView.setAdapter(userAdapter);
             }
 

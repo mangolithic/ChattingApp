@@ -39,10 +39,6 @@ public class UsersFragment extends Fragment {
 
         EditText userSearch;
 
-    public UsersFragment() {
-        // Required empty public constructor
-
-    }
 
 
     @Override
@@ -81,7 +77,7 @@ public class UsersFragment extends Fragment {
     }
 
     private void searchUName(String s) {
-        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance()
                 .getReference("MyUsers").orderByChild("search")
                 .startAt(s).endAt(s + "\uf8ff");
@@ -100,7 +96,7 @@ public class UsersFragment extends Fragment {
                     }
                 }
 
-                userAdapter = new UserAdapter(getContext(), myUsers);
+                userAdapter = new UserAdapter(getContext(), myUsers,false);
                 recyclerView.setAdapter(userAdapter);
             }
 
@@ -114,7 +110,7 @@ public class UsersFragment extends Fragment {
 
 
     private void ReadUsers(){
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("MyUsers");
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -132,7 +128,7 @@ public class UsersFragment extends Fragment {
                         myUsers.add(user);
                     }
                 }
-                    userAdapter = new UserAdapter(getContext(),myUsers);
+                    userAdapter = new UserAdapter(getContext(),myUsers,false);
                     recyclerView.setAdapter(userAdapter);
                 }
             }

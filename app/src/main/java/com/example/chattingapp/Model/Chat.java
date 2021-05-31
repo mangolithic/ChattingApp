@@ -1,7 +1,5 @@
 package com.example.chattingapp.Model;
 
-import android.net.Uri;
-
 public class Chat {
     private String sender;
     private String receiver;
