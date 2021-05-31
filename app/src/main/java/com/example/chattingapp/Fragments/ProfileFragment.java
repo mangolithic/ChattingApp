@@ -88,7 +88,6 @@ public class ProfileFragment extends Fragment {
                 if(name.getImageURL().equals("default")){
                     edit_userPhoto.setImageResource(R.drawable.profile);
                 }else{
-                    //please download Glide
                     Glide.with(getContext()).load(name.getImageURL()).into(edit_userPhoto);
                 }
             }
@@ -189,6 +188,7 @@ public class ProfileFragment extends Fragment {
 
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("imageURL", mUri);
+
                         ref.updateChildren(map);
 
                         progressDialog.dismiss();

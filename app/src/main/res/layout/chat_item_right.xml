@@ -1,34 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:padding="8dp"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="300dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:background="@drawable/background_right">
 
+        <ImageView
+            android:id="@+id/showImg"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/profile"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/profile_image"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
+            android:id="@+id/showMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_right"
+            android:padding="8dp"
             android:text="Hello"
             android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+        <!--<LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:orientation="vertical"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:id="@+id/showMsg"
-            android:textSize="18sp"
-            android:padding="8dp"/>
+            android:layout_below="@id/showMsg">
 
-    </RelativeLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="15dp">
 
+                </androidx.cardview.widget.CardView>-->
+    </LinearLayout>
 </RelativeLayout>

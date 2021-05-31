@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,7 +64,21 @@ public class MessageAdapter extends RecyclerView.Adapter <MessageAdapter.ViewHol
 
         Chat chat= myChat.get(position);
 
-        holder.show_message.setText(chat.getMessage());
+        switch(chat.getType()) {
+            case "TEXT":
+                holder.show_message.setVisibility(View.VISIBLE);
+                holder.showImage.setVisibility(View.GONE);
+
+                holder.show_message.setText(chat.getMessage());
+                break;
+            case "IMAGE":
+                holder.show_message.setVisibility(View.GONE);
+                holder.showImage.setVisibility(View.VISIBLE);
+
+                Glide.with(context).load(chat.getURL()).into(holder.showImage);
+                break;
+        }
+
 
         if (imgURL.equals("default")){
             holder.profile_image.setImageResource(R.drawable.profile);
@@ -79,12 +95,14 @@ public class MessageAdapter extends RecyclerView.Adapter <MessageAdapter.ViewHol
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView show_message;
         CircleImageView profile_image;
+        ImageView showImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             show_message = itemView.findViewById(R.id.showMsg);
             profile_image = itemView.findViewById(R.id.profile_image);
+            showImage = itemView.findViewById(R.id.showImg);
         }
     }
 
